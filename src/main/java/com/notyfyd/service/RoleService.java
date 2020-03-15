@@ -31,14 +31,6 @@ public class RoleService {
         newRole.setName(role.getName());
         newRole.setDescription(role.getDescription());
 
-        for(int i=0; i< role.getUsers().size(); i++){
-            User savedUser = userRepository.save(role.getUsers().get(i));
-            if(!userRepository.findById(savedUser.getId()).isPresent())
-                return ResponseEntity.unprocessableEntity().body("Failed creating user and roles");
-        }
-        if(true) throw new RuntimeException();
-
-
         newRole.setUsers(role.getUsers());
         Role savedRole = roleRepository.save(newRole);
         if (roleRepository.findById(savedRole.getId()).isPresent()) {
