@@ -6,6 +6,7 @@ import com.notyfyd.repository.RoleRepository;
 import com.notyfyd.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RoleService {
@@ -23,6 +24,7 @@ public class RoleService {
      * Create a new role along with users
      */
 
+    @Transactional
     public ResponseEntity<Object> addRole(Role role) {
 
         Role newRole = new Role();
@@ -34,6 +36,7 @@ public class RoleService {
             if(!userRepository.findById(savedUser.getId()).isPresent())
                 return ResponseEntity.unprocessableEntity().body("Failed creating user and roles");
         }
+        if(true) throw new RuntimeException();
 
 
         newRole.setUsers(role.getUsers());
