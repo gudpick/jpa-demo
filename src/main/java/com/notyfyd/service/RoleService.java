@@ -1,6 +1,7 @@
 package com.notyfyd.service;
 
 import com.notyfyd.entity.Role;
+import com.notyfyd.entity.User;
 import com.notyfyd.repository.RoleRepository;
 import com.notyfyd.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,12 @@ public class RoleService {
         Role newRole = new Role();
         newRole.setName(role.getName());
         newRole.setDescription(role.getDescription());
+
+        for(int i=0; i< role.getUsers().size(); i++){
+            User savedUser = userRepository.save(role.getUsers().get(i));
+            if(!userRepository.findById(savedUser.getId()).isPresent())
+                return ResponseEntity.unprocessableEntity().body("Failed creating user and roles");
+        }
 
 
         newRole.setUsers(role.getUsers());
