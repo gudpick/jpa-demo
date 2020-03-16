@@ -16,6 +16,14 @@ public class User {
     @ManyToOne
     @JsonIgnore
     private Role role;
+    @Transient
+    private String roleName;
+    public String getRoleName() {
+        return getRole().getName();
+    }
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public Long getId() {
         return id;
