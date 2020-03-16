@@ -1,7 +1,6 @@
 package com.notyfyd.service;
 
 import com.notyfyd.entity.Role;
-import com.notyfyd.entity.User;
 import com.notyfyd.repository.RoleRepository;
 import com.notyfyd.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
