@@ -1,4 +1,6 @@
 package com.notyfyd.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 @Entity
 @Table(name = "t_user")
