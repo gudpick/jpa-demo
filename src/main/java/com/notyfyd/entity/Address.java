@@ -1,5 +1,6 @@
 package com.notyfyd.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Address {
     private String country;
     private String zipcode;
 
+    @JsonManagedReference
     @OneToOne(targetEntity = Organization.class, mappedBy = "address")
     private Organization organization;
     public Long getId() {

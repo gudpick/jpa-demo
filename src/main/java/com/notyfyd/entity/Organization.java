@@ -14,6 +14,7 @@ public class Organization {
     private String orgId;
 
 
+    @JsonBackReference
     @OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL)
     private Address address;
     public Long getId() {
