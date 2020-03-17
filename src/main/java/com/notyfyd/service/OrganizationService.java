@@ -36,15 +36,7 @@ public class OrganizationService {
             Organization organization = organizationRepository.findById(id).get();
             organization.setName(org.getName());
             organization.setOrgId(org.getName());
-            Address address = addressRepository.findById(organization.getAddress().getId()).get();
-            address.setBuilding(organization.getAddress().getBuilding());
-            address.setStreet(organization.getAddress().getStreet());
-            address.setCity(organization.getAddress().getCity());
-            address.setState(organization.getAddress().getState());
-            address.setCountry(organization.getAddress().getCountry());
-            address.setZipcode(organization.getAddress().getZipcode());
-            Address savedAddress =  addressRepository.save(address);
-            organization.setAddress(savedAddress);
+            organization.setAddress(org.getAddress());
             Organization savedOrganization = organizationRepository.save(organization);
             if(organizationRepository.findById(savedOrganization.getId()).isPresent())
                 return ResponseEntity.ok().body("Successfully Updated Organization");
