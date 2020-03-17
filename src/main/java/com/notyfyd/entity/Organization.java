@@ -13,6 +13,7 @@ public class Organization {
     private String name;
     private String orgId;
 
+
     @OneToOne(targetEntity = Address.class, cascade = CascadeType.ALL)
     private Address address;
     public Long getId() {
