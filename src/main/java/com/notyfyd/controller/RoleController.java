@@ -38,4 +38,14 @@ public class RoleController {
     public List<Role> getRoles() {
         return roleRepository.findAll();
     }
+    @PutMapping("/role/update/{id}")
+    public ResponseEntity<Object> updateRole(@PathVariable Long id, @RequestBody Role role) {
+        return roleService.updateRole(id, role);
+    }
+
+
 }
+
+
+
+

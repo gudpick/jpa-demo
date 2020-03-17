@@ -1,10 +1,11 @@
 package com.notyfyd.entity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "t_user")
-public class User {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,9 +14,17 @@ public class User {
     private String mobile;
     @Column(unique = true)
     private String email;
-    @ManyToOne
-    @JsonIgnore
-    private Role role;
+    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL)
+    private List<Role> roles;
+
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -48,11 +57,7 @@ public class User {
         this.email = email;
     }
 
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
 }
+
+
