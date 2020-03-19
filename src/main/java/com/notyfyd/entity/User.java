@@ -21,7 +21,7 @@ public class User  {
     @Column(unique = true)
     private String email;
 
-    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL )
+    @ManyToMany(targetEntity = Role.class, cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH} )
     private List<Role> roles;
 
 
@@ -97,5 +97,5 @@ public class User  {
 //            joinColumns=
 //                    @JoinColumn( name="user_id", referencedColumnName="id"),
 //            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="id"))
-//{CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
+//
 
