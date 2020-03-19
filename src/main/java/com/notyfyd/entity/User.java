@@ -8,9 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_user")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+
 public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +20,6 @@ public class User  {
     private String email;
 
     @ManyToMany(targetEntity = Role.class, cascade = {CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH} )
-    @JoinTable(
-            name="t_user_roles",
-            joinColumns=
-            @JoinColumn( name="user_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="id"))
     private List<Role> roles;
 
 

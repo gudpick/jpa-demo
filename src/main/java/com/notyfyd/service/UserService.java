@@ -2,6 +2,8 @@ package com.notyfyd.service;
 
 import com.notyfyd.entity.Role;
 import com.notyfyd.entity.User;
+import com.notyfyd.model.RoleModel;
+import com.notyfyd.model.UserModel;
 import com.notyfyd.repository.RoleRepository;
 import com.notyfyd.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +66,45 @@ public class UserService {
                 return ResponseEntity.unprocessableEntity().body("Failed to Delete the specified User");
             else return ResponseEntity.ok().body("Successfully deleted the specified user");
         } else return ResponseEntity.badRequest().body("Cannot find the user specified");
+    }
+
+    public UserModel getUser(Long id) {
+        if(userRepository.findById(id).isPresent()) {
+            User user = userRepository.findById(id).get();
+            UserModel userModel = new UserModel();
+            userModel.setFirstName(user.getFirstName());
+            userModel.setLastName(user.getLastName());
+            userModel.setEmail(user.getEmail());
+            userModel.setMobile(user.getMobile());
+            userModel.setRoles( getRoleList(user));
+            return userModel;
+        } else return null;
+    }
+    public List<UserModel > getUsers() {
+        List<User> userList = userRepository.findAll();
+        if(userList.size()>0) {
+            List<UserModel> userModels = new ArrayList<>();
+            for (User user : userList) {
+                UserModel model = new UserModel();
+                model.setFirstName(user.getFirstName());
+                model.setLastName(user.getLastName());
+                model.setMobile(user.getMobile());
+                model.setEmail(user.getEmail());
+                model.setRoles(getRoleList(user));
+                userModels.add(model);
+            }
+            return userModels;
+        } else return new ArrayList<UserModel>();
+    }
+    private List<RoleModel> getRoleList(User user){
+        List<RoleModel> roleList = new ArrayList<>();
+        for(int i=0; i< user.getRoles().size(); i++) {
+            RoleModel roleModel = new RoleModel();
+            roleModel.setName(user.getRoles().get(i).getName());
+            roleModel.setDescription(user.getRoles().get(i).getDescription());
+            roleList.add(roleModel);
+        }
+        return roleList;
     }
 }
 
