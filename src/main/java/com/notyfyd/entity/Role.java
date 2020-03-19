@@ -1,17 +1,26 @@
 package com.notyfyd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
+import java.util.List;
 
 
 
 @Entity
 @Table(name = "t_role")
-public class Role    {
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+public class Role  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
+    @ManyToMany(targetEntity = User.class,mappedBy = "roles",cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Long getId() {
         return this.id;
@@ -32,6 +41,11 @@ public class Role    {
         this.description = description;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 }
-
-

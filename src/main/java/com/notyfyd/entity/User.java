@@ -1,10 +1,16 @@
 package com.notyfyd.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "t_user")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +20,8 @@ public class User  {
     private String mobile;
     @Column(unique = true)
     private String email;
-    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL)
+
+    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL )
     private List<Role> roles;
 
 
@@ -60,4 +67,35 @@ public class User  {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    @JoinTable(
+//            name="t_user_roles",
+//            joinColumns=
+//                    @JoinColumn( name="user_id", referencedColumnName="id"),
+//            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="id"))
+//{CascadeType.PERSIST, CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH}
 
