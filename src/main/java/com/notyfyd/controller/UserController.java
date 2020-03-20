@@ -18,7 +18,7 @@ public class UserController {
         this.userService = userService;
         this.userRepository = userRepository;
     }
-    //
+
     @PostMapping("/user/create")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
         return userService.createUser(user);

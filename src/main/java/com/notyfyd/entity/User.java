@@ -20,7 +20,6 @@ public class User  {
     private String mobile;
     @Column(unique = true)
     private String email;
-
     @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL )
     private List<Role> roles;
 

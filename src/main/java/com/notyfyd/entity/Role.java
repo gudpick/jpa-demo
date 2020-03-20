@@ -19,7 +19,7 @@ public class Role  {
     private Long id;
     private String name;
     private String description;
-    @ManyToMany(targetEntity = User.class,mappedBy = "roles",cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = User.class, mappedBy = "roles", cascade = CascadeType.ALL)
     private List<User> users;
 
     public Long getId() {
