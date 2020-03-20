@@ -46,6 +46,15 @@ public class RoleService {
 
 
     /** Delete a specified role given the id */
+//    public ResponseEntity<Object> deleteRole(Long id) {
+//        if(roleRepository.findById(id).isPresent()){
+//            roleRepository.deleteById(id);
+//            if(roleRepository.findById(id).isPresent()){
+//                return ResponseEntity.unprocessableEntity().body("Failed to delete the specified record");
+//            } else return ResponseEntity.ok().body("Successfully deleted specified record");
+//        } else
+//            return ResponseEntity.unprocessableEntity().body("No Records Found");
+//    }
     public ResponseEntity<Object> deleteRole(Long id) {
         if(roleRepository.findById(id).isPresent()){
             if(roleRepository.getOne(id).getUsers().size() == 0) {
